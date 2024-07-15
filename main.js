@@ -1,6 +1,28 @@
+const display = document.querySelector(".display");
+const numberButtons = document.querySelectorAll(".number");
+const clearButton = document.querySelector(".clear");
+const deleteButton = document.querySelector(".delete");
+
 let firstNumber;
 let secondNumber;
 let operator;
+
+deleteButton.addEventListener("click", () => {
+    displayContent = display.textContent;
+    displayContent = Math.floor(displayContent / 10);
+    display.textContent = displayContent;
+});
+
+clearButton.addEventListener("click", () => {
+    display.textContent = "";
+});
+
+numberButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const value = button.textContent;
+        display.textContent += value;
+    });
+});
 
 function operate(firstNumber, secondNumber, operator) {
     if (operator == "+") {
