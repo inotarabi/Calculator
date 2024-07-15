@@ -2,6 +2,7 @@ const display = document.querySelector(".display");
 const numberButtons = document.querySelectorAll(".number");
 const clearButton = document.querySelector(".clear");
 const deleteButton = document.querySelector(".delete");
+const decimalButton = document.querySelector("#decimal");
 
 let firstNumber;
 let secondNumber;
@@ -14,6 +15,21 @@ deleteButton.addEventListener("click", () => {
 
 clearButton.addEventListener("click", () => {
     display.textContent = "";
+});
+
+decimalButton.addEventListener("click", () => {
+    decimal = ".";
+    isThereADecimal = false;
+    displayContent = display.textContent.toString();
+    for (eachDigit = 0; eachDigit <= displayContent.length - 1; eachDigit++) {
+        currentDigit = displayContent[eachDigit];
+        if (currentDigit == decimal) {
+            isThereADecimal = true;
+        }
+    }
+    if (isThereADecimal == false) {
+        display.textContent = displayContent + ".";
+    }
 });
 
 numberButtons.forEach((button) => {
