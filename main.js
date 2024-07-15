@@ -3,7 +3,10 @@ const numberButtons = document.querySelectorAll(".number");
 const clearButton = document.querySelector(".clear");
 const deleteButton = document.querySelector(".delete");
 const decimalButton = document.querySelector("#decimal");
+const allButtons = document.querySelectorAll(".key");
 
+let inputNumbersArray = [];
+let inputNumbersArrayNew = [];
 let firstNumber;
 let secondNumber;
 let operator;
@@ -38,6 +41,24 @@ numberButtons.forEach((button) => {
         display.textContent += value;
     });
 });
+
+allButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const value = button.textContent;
+        inputNumbersArray.push(value);
+        console.log(inputNumbersArray);
+
+        createNewNumberArray(oldNumberArray);
+    });
+});
+
+function createNewNumberArray(oldNumberArray) {
+    // the old array will be all the numbers some one types
+    // up until = is hit
+    // I will combine each indicie before operator and after into one
+    // this is the new array
+    // I will use index 0, 1, 2 to subsitute into operate
+}
 
 function operate(firstNumber, secondNumber, operator) {
     if (operator == "+") {
