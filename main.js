@@ -9,8 +9,7 @@ let operator;
 
 deleteButton.addEventListener("click", () => {
     displayContent = display.textContent;
-    displayContent = Math.floor(displayContent / 10);
-    display.textContent = displayContent;
+    display.textContent = displayContent.slice(0, -1);
 });
 
 clearButton.addEventListener("click", () => {
