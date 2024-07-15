@@ -12,10 +12,10 @@ body {
 
 .calc-container {
     font-family: calculator;
-    background-color: #586269;
+    background-color: #50595f;
     border-radius: 7px;
     width: 350px;
-    height: 400px;
+    height: 410px;
     margin-top: 50px;
     padding: 10px;
 }
@@ -34,35 +34,61 @@ body {
     justify-content: space-around;
     padding-top: 7px;
     padding-bottom: 7px;
+    gap: 5px;
 }
 
 .clear,
 .delete {
-    background-color: rgb(207, 59, 59);
+    background-color: rgb(206, 87, 87);
     border-radius: 7px;
     width: 200px;
     height: 50px;
 }
 
+.clear:hover,
+.delete:hover {
+    background-color: rgb(207, 70, 70);
+}
+
+.clear:active,
+.delete:active {
+    background-color: rgb(202, 53, 53);
+}
+
 .keys {
     display: flex;
     flex-wrap: wrap;
+    gap: 5px;
 }
 
 button {
-    background-color: #3f464b;
+    background-color: #3a4146;
+    border: 0px solid;
     color: white;
     font-family: calculator;
     font-size: 25px;
-    border-radius: 10px;
-    width: 87.5px;
+    border-radius: 30px;
+    width: 82.5px;
     height: 70px;
 }
 
 button:hover {
+    background-color: rgb(63, 71, 77);
     transform: scale(1.03);
+}
+
+button:active {
+    background-color: rgb(69, 75, 80);
 }
 
 .calculate {
     background-color: #94a1aa;
+}
+
+.calculate:hover {
+    background-color: rgb(127, 140, 148);
+}
+
+.calculate:active {
+    background-color: rgb(116, 129, 138);
 }
