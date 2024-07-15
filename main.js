@@ -5,6 +5,7 @@ const deleteButton = document.querySelector(".delete");
 const decimalButton = document.querySelector("#decimal");
 const allButtons = document.querySelectorAll(".key");
 
+let allOperators = ["x", "/", "+", "-"];
 let inputNumbersArray = [];
 let inputNumbersArrayNew = [];
 let firstNumber;
@@ -14,10 +15,12 @@ let operator;
 deleteButton.addEventListener("click", () => {
     displayContent = display.textContent;
     display.textContent = displayContent.slice(0, -1);
+    inputNumbersArray = inputNumbersArray.slice(0, -1);
 });
 
 clearButton.addEventListener("click", () => {
     display.textContent = "";
+    inputNumbersArray = [];
 });
 
 decimalButton.addEventListener("click", () => {
@@ -46,18 +49,34 @@ allButtons.forEach((button) => {
     button.addEventListener("click", () => {
         const value = button.textContent;
         inputNumbersArray.push(value);
-        console.log(inputNumbersArray);
-
-        createNewNumberArray(oldNumberArray);
+        // console.log(inputNumbersArray);
+        createNewNumberArray(inputNumbersArray);
     });
 });
 
 function createNewNumberArray(oldNumberArray) {
-    // the old array will be all the numbers some one types
-    // up until = is hit
-    // I will combine each indicie before operator and after into one
-    // this is the new array
-    // I will use index 0, 1, 2 to subsitute into operate
+    let indexWhereOperatorExists;
+    let whichOperator;
+
+    for (index = 0; index <= oldNumberArray.length - 1; index++) {
+        for (
+            operatorArrayIndex = 0;
+            operatorArrayIndex <= 3;
+            operatorArrayIndex++
+        ) {
+            if (oldNumberArray[index] == allOperators[operatorArrayIndex]) {
+                indexWhereOperatorExists = index;
+                whichOperator = allOperators[operatorArrayIndex];
+                console.log(indexWhereOperatorExists);
+                console.log(whichOperator);
+            }
+        }
+    }
+
+    inputNumbersArrayNew[0] = inputNumbersArrayNew.push(
+        oldNumberArray.slice(0, whichOperator)
+    );
+    console.log(inputNumbersArrayNew);
 }
 
 function operate(firstNumber, secondNumber, operator) {
