@@ -1,3 +1,7 @@
+// no longer need to press clear after every calculation to perform a calculation
+// however still there is not multiple calculations
+// if there exists a decimal in number array then do not input a decimal but for any other value input it
+
 const display = document.querySelector(".display");
 const numberButtons = document.querySelectorAll(".number");
 const clearButton = document.querySelector(".clear");
@@ -13,7 +17,9 @@ let inputNumbersArrayNew = [];
 let firstNumber = "";
 let secondNumber = "";
 let operator;
+let isThereMultipleOperators = false;
 let isEqualPressed = false;
+let isOperatorPressed = false;
 
 equalButton.addEventListener("click", () => {
     isEqualPressed = true;
@@ -59,22 +65,36 @@ numberButtons.forEach((button) => {
 
 allButtons.forEach((button) => {
     button.addEventListener("click", () => {
+        isThereADecimal = false;
         const value = button.textContent;
-        inputNumbersArray.push(value);
-        console.log(inputNumbersArray);
-        createNewNumberArray(inputNumbersArray);
+        for (index = 0; index <= inputNumbersArray.length - 1; index++) {
+            if (inputNumbersArray[index] == decimal) {
+                isThereADecimal = true;
+            }
+        }
+        if (value == decimal && isThereADecimal == false) {
+            inputNumbersArray.push(value);
+            console.log(inputNumbersArray);
+            createNewNumberArray(inputNumbersArray);
+        } else if (value != decimal) {
+            inputNumbersArray.push(value);
+            console.log(inputNumbersArray);
+            createNewNumberArray(inputNumbersArray);
+        }
     });
 });
 
 allOperatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
         display.textContent = "";
+        isOperatorPressed = true;
     });
 });
 
 function createNewNumberArray(oldNumberArray) {
     let indexWhereOperatorExists;
     let whichOperator;
+    inputNumbersArrayNew = [];
 
     for (let index = 0; index <= oldNumberArray.length - 1; index++) {
         for (
@@ -91,7 +111,7 @@ function createNewNumberArray(oldNumberArray) {
         }
     }
 
-    if (isEqualPressed == true) {
+    if (isEqualPressed) {
         for (let index = 0; index < indexWhereOperatorExists; index++) {
             firstNumber += oldNumberArray[index].toString();
         }
@@ -107,13 +127,24 @@ function createNewNumberArray(oldNumberArray) {
         inputNumbersArrayNew.push(Number(firstNumber));
         inputNumbersArrayNew.push(whichOperator);
         inputNumbersArrayNew.push(Number(secondNumber));
-        console.log(inputNumbersArrayNew);
+
+        firstNumber = "";
+        secondNumber = "";
+        whichOperator = "";
 
         display.textContent = operate(
             inputNumbersArrayNew[0],
             inputNumbersArrayNew[2],
             inputNumbersArrayNew[1]
         );
+        console.log(inputNumbersArrayNew);
+        inputNumbersArrayNew = [];
+        inputNumbersArray = [];
+        inputNumbersArray[0] = display.textContent;
+
+        console.log(inputNumbersArrayNew);
+        console.log(inputNumbersArray);
+        isEqualPressed = false;
     }
 }
 
