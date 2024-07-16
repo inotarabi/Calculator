@@ -4,13 +4,21 @@ const clearButton = document.querySelector(".clear");
 const deleteButton = document.querySelector(".delete");
 const decimalButton = document.querySelector("#decimal");
 const allButtons = document.querySelectorAll(".key");
+const equalButton = document.querySelector("#equals");
+const allOperatorButtons = document.querySelectorAll(".operator");
 
 let allOperators = ["x", "/", "+", "-"];
 let inputNumbersArray = [];
 let inputNumbersArrayNew = [];
-let firstNumber;
-let secondNumber;
+let firstNumber = "";
+let secondNumber = "";
 let operator;
+let isEqualPressed = false;
+
+equalButton.addEventListener("click", () => {
+    isEqualPressed = true;
+    console.log(isEqualPressed);
+});
 
 deleteButton.addEventListener("click", () => {
     displayContent = display.textContent;
@@ -20,7 +28,11 @@ deleteButton.addEventListener("click", () => {
 
 clearButton.addEventListener("click", () => {
     display.textContent = "";
+    firstNumber = "";
+    secondNumber = "";
+    isEqualPressed = false;
     inputNumbersArray = [];
+    inputNumbersArrayNew = [];
 });
 
 decimalButton.addEventListener("click", () => {
@@ -49,8 +61,14 @@ allButtons.forEach((button) => {
     button.addEventListener("click", () => {
         const value = button.textContent;
         inputNumbersArray.push(value);
-        // console.log(inputNumbersArray);
+        console.log(inputNumbersArray);
         createNewNumberArray(inputNumbersArray);
+    });
+});
+
+allOperatorButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        display.textContent = "";
     });
 });
 
@@ -58,7 +76,7 @@ function createNewNumberArray(oldNumberArray) {
     let indexWhereOperatorExists;
     let whichOperator;
 
-    for (index = 0; index <= oldNumberArray.length - 1; index++) {
+    for (let index = 0; index <= oldNumberArray.length - 1; index++) {
         for (
             operatorArrayIndex = 0;
             operatorArrayIndex <= 3;
@@ -73,21 +91,41 @@ function createNewNumberArray(oldNumberArray) {
         }
     }
 
-    inputNumbersArrayNew[0] = inputNumbersArrayNew.push(
-        oldNumberArray.slice(0, whichOperator)
-    );
-    console.log(inputNumbersArrayNew);
+    if (isEqualPressed == true) {
+        for (let index = 0; index < indexWhereOperatorExists; index++) {
+            firstNumber += oldNumberArray[index].toString();
+        }
+
+        for (
+            let index = indexWhereOperatorExists + 1;
+            index < oldNumberArray.length - 1;
+            index++
+        ) {
+            secondNumber += oldNumberArray[index].toString();
+        }
+
+        inputNumbersArrayNew.push(Number(firstNumber));
+        inputNumbersArrayNew.push(whichOperator);
+        inputNumbersArrayNew.push(Number(secondNumber));
+        console.log(inputNumbersArrayNew);
+
+        display.textContent = operate(
+            inputNumbersArrayNew[0],
+            inputNumbersArrayNew[2],
+            inputNumbersArrayNew[1]
+        );
+    }
 }
 
 function operate(firstNumber, secondNumber, operator) {
     if (operator == "+") {
-        add(firstNumber, secondNumber);
+        return add(firstNumber, secondNumber);
     } else if (operator == "-") {
-        subtract(firstNumber, secondNumber);
+        return subtract(firstNumber, secondNumber);
     } else if (operator == "x") {
-        multiply(firstNumber, secondNumber);
+        return multiply(firstNumber, secondNumber);
     } else if (operator == "/") {
-        divide(firstNumber, secondNumber);
+        return divide(firstNumber, secondNumber);
     }
 }
 
