@@ -23,10 +23,12 @@ body {
 .display {
     text-align: right;
     background-color: #6eb96e;
-    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 350px;
     height: 50px;
     border-radius: 7px;
-    font-size: 45px;
+    font-size: 2.1em;
 }
 
 .options {

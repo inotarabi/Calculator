@@ -1,7 +1,3 @@
-// no longer need to press clear after every calculation to perform a calculation
-// however still there is not multiple calculations
-// if there exists a decimal in number array then do not input a decimal but for any other value input it
-
 const display = document.querySelector(".display");
 const numberButtons = document.querySelectorAll(".number");
 const clearButton = document.querySelector(".clear");
@@ -59,7 +55,9 @@ decimalButton.addEventListener("click", () => {
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
         const value = button.textContent;
-        display.textContent += value;
+        if (display.textContent.length < 10) {
+            display.textContent += value;
+        }
     });
 });
 
@@ -132,18 +130,22 @@ function createNewNumberArray(oldNumberArray) {
         secondNumber = "";
         whichOperator = "";
 
-        display.textContent = operate(
-            inputNumbersArrayNew[0],
-            inputNumbersArrayNew[2],
-            inputNumbersArrayNew[1]
+        display.textContent = Number(
+            operate(
+                inputNumbersArrayNew[0],
+                inputNumbersArrayNew[2],
+                inputNumbersArrayNew[1]
+            ).toFixed(7)
         );
-        console.log(inputNumbersArrayNew);
+
+        console.log(inputNumbersArrayNew); // test
+
         inputNumbersArrayNew = [];
         inputNumbersArray = [];
         inputNumbersArray[0] = display.textContent;
 
-        console.log(inputNumbersArrayNew);
-        console.log(inputNumbersArray);
+        console.log(inputNumbersArrayNew); // test
+        console.log(inputNumbersArray); // test
         isEqualPressed = false;
     }
 }
