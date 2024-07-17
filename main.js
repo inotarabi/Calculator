@@ -55,7 +55,7 @@ decimalButton.addEventListener("click", () => {
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
         const value = button.textContent;
-        if (display.textContent.length < 10) {
+        if (display.textContent.length < 16) {
             display.textContent += value;
         }
     });
@@ -175,5 +175,9 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-    return num1 / num2;
+    if (num2 === 0) {
+        alert("Divide by ZERO Try again");
+    } else {
+        return num1 / num2;
+    }
 }
